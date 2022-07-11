@@ -1,24 +1,29 @@
-import logo from './logo.svg';
-import './App.css';
+import Auth from "./components/auth";
+import Dashboard from "./components/dashboard";
+import List from "./components/list";
+import { useUserContext } from "./context/userContext";
+import {Routes,Route} from "react-router-dom";
+
 
 function App() {
+
+  const { user } = useUserContext();
+  
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      
+     
+    <Routes>
+      
+      <Route path="/" element={<Auth  />} />
+      
+      <Route path="/dashboard"  element={user ? <Dashboard />:<Auth /> } />
+      <Route path="/list"  element={user ? <List />:<Auth /> } />
+      
+    </Routes>
+    </>
+    
   );
 }
 
